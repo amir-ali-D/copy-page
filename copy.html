@@ -25,65 +25,83 @@
 
     .box {
       width: 100%;
-      max-width: 420px;
+      max-width: 480px;
       margin: 16px;
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(10px);
-      border-radius: 26px;
-      padding: 30px 22px 34px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      background: rgba(255,255,255,0.14);
+      backdrop-filter: blur(12px);
+      border-radius: 30px;
+      padding: 42px 26px 44px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.45);
       text-align: center;
       animation: fadeUp 0.8s ease;
     }
 
     .title {
-      font-size: 42px;
-      margin-bottom: 16px;
+      font-size: 44px;
+      margin-bottom: 18px;
       color: #ffdd57;
     }
 
     .status {
-      font-size: 18px;
+      font-size: 19px;
       opacity: 0.9;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .number {
-      font-size: 26px;
+      font-size: 28px;
       letter-spacing: 3px;
-      margin-bottom: 22px;
+      margin-bottom: 26px;
       font-weight: bold;
     }
 
     .btn {
       width: 100%;
-      padding: 20px 0;
-      font-size: 22px;
+      padding: 22px 0;
+      font-size: 23px;
       font-weight: bold;
       border: none;
-      border-radius: 18px;
+      border-radius: 20px;
       cursor: pointer;
       background: linear-gradient(135deg, #ffdd57, #ffc107);
       color: #1b2b34;
       box-shadow:
-        0 8px 0 #c9a600,
-        0 18px 30px rgba(0,0,0,0.45);
+        0 9px 0 #c9a600,
+        0 20px 35px rgba(0,0,0,0.45);
       transition: all 0.2s ease;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
     .btn:active {
       transform: translateY(6px);
       box-shadow:
-        0 3px 0 #c9a600,
-        0 10px 18px rgba(0,0,0,0.45);
+        0 4px 0 #c9a600,
+        0 12px 22px rgba(0,0,0,0.45);
+    }
+
+    .btn.disabled {
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    /* لرزش */
+    .shake {
+      animation: shake 0.35s;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      50% { transform: translateX(6px); }
+      75% { transform: translateX(-6px); }
+      100% { transform: translateX(0); }
     }
 
     .progress {
       width: 100%;
-      height: 10px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 10px;
+      height: 12px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 12px;
       overflow: hidden;
     }
 
@@ -111,22 +129,21 @@
     }
 
     @media (max-width: 360px) {
-      .title { font-size: 36px; }
-      .number { font-size: 22px; }
-      .status { font-size: 16px; }
-      .btn { font-size: 20px; }
+      .title { font-size: 38px; }
+      .number { font-size: 24px; }
+      .btn { font-size: 21px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="box">
+  <div class="box" id="box">
     <div class="title">سلام</div>
 
     <div class="status">شماره کارت زیر کپی می‌شود</div>
     <div class="number">6037&nbsp;6919&nbsp;9051&nbsp;9415</div>
 
-    <button class="btn" onclick="copyAndGo()">کپی کنید</button>
+    <button class="btn" id="copyBtn" onclick="copyAndGo()">کپی کنید</button>
 
     <div class="progress">
       <div class="progress-bar"></div>
@@ -139,7 +156,25 @@
 
     function copyAndGo() {
       copyCard();
-      goNow();
+
+      const box = document.getElementById("box");
+      const btn = document.getElementById("copyBtn");
+
+      // لرزش کادر
+      box.classList.add("shake");
+
+      // تغییر متن دکمه
+      btn.textContent = "در حال انتقال…";
+      btn.classList.add("disabled");
+
+      // افکت محو و انتقال سریع
+      setTimeout(() => {
+        document.body.classList.add("fade-out");
+      }, 300);
+
+      setTimeout(() => {
+        window.location.href = targetLink;
+      }, 600);
     }
 
     function copyCard() {
@@ -151,14 +186,7 @@
       document.body.removeChild(temp);
     }
 
-    function goNow() {
-      document.body.classList.add("fade-out");
-      setTimeout(() => {
-        window.location.href = targetLink;
-      }, 400);
-    }
-
-    // انتقال خودکار اگر دکمه زده نشود
+    // انتقال خودکار اگر کلیک نشود
     setTimeout(() => {
       document.body.classList.add("fade-out");
     }, 3500);
