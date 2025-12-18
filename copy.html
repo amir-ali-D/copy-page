@@ -2,7 +2,7 @@
 <html lang="fa">
 <head>
   <meta charset="UTF-8">
-  <title>کپی شد</title>
+  <title>کپی شماره کارت</title>
   <style>
     body {
       font-family: Vazirmatn, Tahoma, sans-serif;
@@ -13,6 +13,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: opacity 1s ease; /* برای انیمیشن انتقال */
     }
 
     .box {
@@ -22,6 +23,8 @@
       text-align: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.25);
       backdrop-filter: blur(6px);
+      width: 320px;
+      transition: transform 0.5s ease;
     }
 
     .number {
@@ -34,19 +37,63 @@
     .status {
       font-size: 16px;
       opacity: 0.9;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background: #ffeb3b;
+      color: #1e3c72;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ffe54b;
+      transform: scale(1.05);
+    }
+
+    /* لودینگ دایره‌ای */
+    .loader {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid #ffeb3b;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 8px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
 
-  <div class="box">
-    <div class="status">شماره کارت با موفقیت کپی شد</div>
-    <div class="number">6037 6919 9051 9415</div>
+  <div class="box" id="box">
+    <div class="status" id="status">شماره کارت با موفقیت کپی شد</div>
+    <div class="number" id="cardNumber">6037 6919 9051 9415</div>
+    <button id="copyBtn">کپی دستی شماره کارت
+      <span class="loader" id="loader"></span>
+    </button>
     <div class="status">در حال انتقال…</div>
   </div>
 
   <script>
     const cardNumber = "6037691990519415";
+    const copyBtn = document.getElementById("copyBtn");
+    const loader = document.getElementById("loader");
+    const status = document.getElementById("status");
+    const box = document.getElementById("box");
 
     function copyText(text) {
       const temp = document.createElement("textarea");
@@ -57,12 +104,30 @@
       document.body.removeChild(temp);
     }
 
-    // کپی فقط شماره کارت
+    // کپی خودکار شماره کارت
     copyText(cardNumber);
 
-    // انتقال بعد از ۲ ثانیه
+    copyBtn.addEventListener("click", () => {
+      loader.style.opacity = "1"; // نمایش لودینگ
+      copyText(cardNumber);
+      status.textContent = "کپی شد! در حال پردازش...";
+      setTimeout(() => {
+        loader.style.opacity = "0"; // مخفی کردن لودینگ
+        status.textContent = "شماره کارت با موفقیت کپی شد";
+      }, 1500);
+    });
+
+    function redirectWithAnimation(url) {
+      document.body.style.opacity = '0'; // محو کردن صفحه
+      box.style.transform = 'scale(0.95)'; // انیمیشن کوچک شدن
+      setTimeout(() => {
+        window.location.href = url;
+      }, 1000); // صبر برای انیمیشن
+    }
+
+    // انتقال خودکار بعد از ۲ ثانیه با انیمیشن
     setTimeout(() => {
-      window.location.href = "https://eitaa.com/@Mohammad_sadegh3682";
+      redirectWithAnimation("https://eitaa.com/Eatcaf_hasanain");
     }, 2000);
   </script>
 
