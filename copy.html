@@ -2,109 +2,23 @@
 <html lang="fa">
 <head>
   <meta charset="UTF-8">
-  <title>کپی شماره کارت</title>
+  <title>ثبت نام اعتکاف رجبیه</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- فونت‌ها -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
     body {
-      font-family: Vazirmatn, Tahoma, sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: #fff;
-      height: 100vh;
       margin: 0;
+      padding: 0;
+      font-family: 'Vazirmatn', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      min-height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
-      transition: opacity 1s ease; /* برای انیمیشن انتقال */
-    }
-
-    .box {
-      background: rgba(255, 255, 255, 0.12);
-      padding: 30px 40px;
-      border-radius: 16px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-      backdrop-filter: blur(6px);
-      width: 320px;
-      transition: transform 0.5s ease;
-    }
-
-    .number {
-      font-size: 22px;
-      letter-spacing: 2px;
-      margin: 15px 0;
-      color: #ffeb3b;
-    }
-
-    .status {
-      font-size: 16px;
-      opacity: 0.9;
-      margin-bottom: 10px;
-    }
-
-    button {
-      background: #ffeb3b;
-      color: #1e3c72;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background: #ffe54b;
-      transform: scale(1.05);
-    }
-
-    /* لودینگ دایره‌ای */
-    .loader {
-      border: 4px solid rgba(255, 255, 255, 0.3);
-      border-top: 4px solid #ffeb3b;
-      border-radius: 50%;
-      width: 24px;
-      height: 24px;
-      animation: spin 1s linear infinite;
-      display: inline-block;
-      vertical-align: middle;
-      margin-left: 8px;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  </style>
-</head>
-<body>
-
-  <div class="box" id="box">
-    <div class="status" id="status">شماره کارت با موفقیت کپی شد</div>
-    <div class="number" id="cardNumber">6037 6919 9051 9415</div>
-    <button id="copyBtn">کپی کنید
-      <span class="loader" id="loader"></span>
-    </button>
-    <div class="status">در حال انتقال…</div>
-  </div>
-
-  <script>
-    const cardNumber = "6037691990519415";
-    const copyBtn = document.getElementById("copyBtn");
-    const loader = document.getElementById("loader");
-    const status = document.getElementById("status");
-    const box = document.getElementById("box");
-
-    function copyText(text) {
-      const temp = document.createElement("textarea");
-      temp.value = text;
-      document.body.appendChild(temp);
-      temp.select();
-      document.execCommand("copy");
-      document.body.removeChild(temp);
-    }
-
-    // کپی خودکار شماره کارت
+      align-items: center;
+      color:    // کپی خودکار شماره کارت
     copyText(cardNumber);
 
     copyBtn.addEventListener("click", () => {
