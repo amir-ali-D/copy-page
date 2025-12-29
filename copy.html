@@ -84,7 +84,6 @@
       opacity: 0.85;
     }
 
-    /* لرزش */
     .shake {
       animation: shake 0.35s;
     }
@@ -141,7 +140,7 @@
     <div class="title">سلام</div>
 
     <div class="status">شماره کارت زیر کپی می‌شود</div>
-    <div class="number">6037&nbsp;6919&nbsp;9051&nbsp;9415</div>
+    <div class="number">5859&nbsp;8318&nbsp;6268&nbsp;5889</div>
 
     <button class="btn" id="copyBtn" onclick="copyAndGo()">کپی کنید</button>
 
@@ -151,8 +150,8 @@
   </div>
 
   <script>
-    const cardNumber = "6037691990519415";
-    const targetLink = "https://eitaa.com/Etekaf_hasanain";
+    const cardNumber = "5859831862685889";
+    const targetLink = "https://eitaa.com/Eatcaf_hasanain";
 
     function copyAndGo() {
       copyCard();
@@ -160,14 +159,11 @@
       const box = document.getElementById("box");
       const btn = document.getElementById("copyBtn");
 
-      // لرزش کادر
       box.classList.add("shake");
 
-      // تغییر متن دکمه
       btn.textContent = "در حال انتقال…";
       btn.classList.add("disabled");
 
-      // افکت محو و انتقال سریع
       setTimeout(() => {
         document.body.classList.add("fade-out");
       }, 300);
@@ -186,7 +182,6 @@
       document.body.removeChild(temp);
     }
 
-    // انتقال خودکار اگر کلیک نشود
     setTimeout(() => {
       document.body.classList.add("fade-out");
     }, 3500);
